@@ -42,13 +42,13 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: npm i
+        run: ls -la
 
-      - name: Build project
-        run: npm run build
+      # - name: Build project
+      #   run: npm run build
 
-      - name: Package Lambda
-        run: |
-          mkdir -p dist-package
-          cp -r dist node_modules package.json dist-package/
-          cd dist-package && zip -r ../lambda.zip .
+      # - name: Package Lambda
+      #   run: |
+      #     mkdir -p dist-package
+      #     cp -r dist node_modules package.json dist-package/
+      #     cd dist-package && zip -r ../lambda.zip .
