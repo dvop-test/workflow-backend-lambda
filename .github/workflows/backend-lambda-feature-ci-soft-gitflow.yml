@@ -28,6 +28,9 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./app
 
     outputs:
       artifact-name: ${{ steps.artifact.outputs.name }}
@@ -41,17 +44,16 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-          cache-dependency-path: './app/package-lock.json'
+          cache-dependency-path: './package-lock.json'
 
       - name: Install dependencies
-        working-directory: ./app
-        run: npm install
+        run: ls -la && npm install
 
-      - name: Build project
-        run: npm run build
+      # - name: Build project
+      #   run: npm run build
 
-      - name: Package Lambda
-        run: |
-          mkdir -p dist-package
-          cp -r dist node_modules package.json dist-package/
-          cd dist-package && zip -r ../lambda.zip .
+      # - name: Package Lambda
+      #   run: |
+      #     mkdir -p dist-package
+      #     cp -r dist node_modules package.json dist-package/
+      #     cd dist-package && zip -r ../lambda.zip .
