@@ -48,6 +48,8 @@ jobs:
 
       - name: Package Lambda
         run: |
+          pwd
+          ls
           mkdir -p dist-package
           cp -r dist node_modules package.json dist-package/
           cd dist-package && zip -r ../lambda.zip .
