@@ -51,8 +51,9 @@ jobs:
         working-directory: ./app
         run: npm run build && ls -la
 
-      # - name: Package Lambda
-      #   run: |
-      #     mkdir -p dist-package
-      #     cp -r dist node_modules package.json dist-package/
-      #     cd dist-package && zip -r ../lambda.zip .
+      - name: Package Lambda
+        working-directory: ./app
+        run: |
+          mkdir -p dist-package
+          cp -r dist node_modules package.json dist-package/
+          cd dist-package && zip -r ../lambda.zip .
