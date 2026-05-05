@@ -42,7 +42,7 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: ls -la
+        run: cd app && ls -la
 
       # - name: Build project
       #   run: npm run build
