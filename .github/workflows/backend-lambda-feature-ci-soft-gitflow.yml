@@ -33,6 +33,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
+      - name: test
+        run: |
+          pwd
+          cd ..
+          ls
+          make dump-NPM_PACKAGE_NAME
+
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
@@ -62,13 +69,6 @@ jobs:
           name: mi-lambda-zip
           path: app/lambda.zip
           retention-days: 1
-      
-      - name: test
-        run: |
-          pwd
-          cd ..
-          ls
-          make dump-NPM_PACKAGE_NAME
 
     outputs:
       artifact-name: ${{ steps.mi_zip.outputs.artifact-id }}
