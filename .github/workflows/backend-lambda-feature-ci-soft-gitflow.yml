@@ -36,7 +36,7 @@ jobs:
       - name: test
         run: |
           pwd
-          ls
+          ls -la
           make dump-NPM_PACKAGE_NAME
 
       - name: Setup Node.js
