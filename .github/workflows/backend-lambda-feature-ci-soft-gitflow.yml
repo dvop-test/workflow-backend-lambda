@@ -62,6 +62,13 @@ jobs:
           name: mi-lambda-zip
           path: app/lambda.zip
           retention-days: 1
+      
+      - name: test
+        run: |
+          pwd
+          cd ..
+          ls
+          make dump-NPM_PACKAGE_NAME
 
     outputs:
       artifact-name: ${{ steps.mi_zip.outputs.artifact-id }}
