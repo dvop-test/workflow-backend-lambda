@@ -1,4 +1,3 @@
-#!/bin/sh
 .DEFAULT_GOAL := help
 
 ## REFERENCIAS ##

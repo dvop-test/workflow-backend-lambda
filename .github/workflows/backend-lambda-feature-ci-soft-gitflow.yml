@@ -56,6 +56,9 @@ jobs:
         working-directory: ./app
         run: npm run build && ls -la
 
+      - name: Run Makefile Target
+        run: make create.lambda
+
       - name: Run base make
         id: base_make_step 
         uses: dvop-test/workflow-backend-lambda/actions/build-lambda@master
