@@ -1,5 +1,3 @@
-#!/bin/sh
-
 .PHONY: create.lambda \
 
 ## FUNTIONS ##

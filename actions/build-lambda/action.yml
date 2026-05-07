@@ -1,0 +1,20 @@
+name: 'Build Lambda'
+description: 'Builds the Lambda function and prepares it for deployment.'
+
+outputs:
+  artifact-id:
+    description: "ID del artefacto generado"
+    value: ${{ steps.mi_paso.outputs.result }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run Centralized Makefile
+      id: mi_paso
+      shell: bash
+      working-directory: ${{ github.action_path }}/../../ 
+      run: | 
+        make create.lambda
+        echo ${{ github.workspace }}
+        echo ${{ github.action_path }}
+        echo "result=mi-lambda.zip" >> $GITHUB_OUTPUT

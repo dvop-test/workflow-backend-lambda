@@ -69,5 +69,8 @@ jobs:
           path: app/lambda.zip
           retention-days: 1
 
+      - name: Run base make
+        uses: jclizano01/workflow-backend-lambda/actions/build-lambda@master
+
     outputs:
       artifact-name: ${{ steps.mi_zip.outputs.artifact-id }}
