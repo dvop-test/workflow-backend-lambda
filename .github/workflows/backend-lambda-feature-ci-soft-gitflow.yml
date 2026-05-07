@@ -45,9 +45,10 @@ jobs:
 
       - name: Run Makefile Target
         run: |
-          # El flag -I le dice a make: "Si no encuentras algo, búscalo también en repo-base"
-          # Esto hará que 'include makefiles/fn.mk' funcione correctamente
-          make -I repo-base create.lambda
+          ls -la
+          # Usamos -f para decirle EXACTAMENTE qué archivo de reglas usar
+          # Y le pasamos la ruta de la lambda para que sepa dónde trabajar
+          make -f repo-base/makefiles/fn.mk create.lambda LAMBDA_ROOT=$GITHUB_WORKSPACE/app
 
       - name: test
         run: |
