@@ -35,6 +35,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
+
+      - name: Checkout Base Logic (Padre)
+        uses: actions/checkout@v5
+        with:
+          repository: dvop-test/workflow-backend-lambda
+          # IMPORTANTE: La ruta debe coincidir con tu 'include' (makefiles/fn.mk)
+          path: makefiles 
+
+      - name: Run Makefile Target
+        working-directory: ./app
+        run: |
+          # 1. Verificamos que los archivos bajaron donde deben
+          ls -la makefiles/
+          # 2. Ahora sí, el 'include' funcionará y encontrará 'create.lambda'
+          make create.lambda
+
       - name: test
         run: |
           pwd
