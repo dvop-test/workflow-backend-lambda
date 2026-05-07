@@ -44,11 +44,12 @@ jobs:
           path: makefiles 
 
       - name: Run Makefile Target
-        working-directory: ./app
         run: |
-          # 1. Verificamos que los archivos bajaron donde deben
-          ls -la makefiles/
-          # 2. Ahora sí, el 'include' funcionará y encontrará 'create.lambda'
+          # 1. Verificamos la ruta actual
+          pwd
+          # 2. Listamos para ver qué hay en la raíz
+          ls -F
+          # 3. Si 'makefiles' aparece con una /, el include funcionará
           make create.lambda
 
       - name: test
