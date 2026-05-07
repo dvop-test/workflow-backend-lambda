@@ -1,13 +1,15 @@
-.PHONY: create.lambda \
+.PHONY: update.lambda \
 
 ## FUNTIONS ##
 define create.zip
-	@echo "Creating Lambda function..."
+	@echo "---- Empaquetando desde $(LAMBDA_ROOT) ----"
+	ls -la $(LAMBDA_ROOT)/dist
+	cd $(LAMBDA_ROOT)/dist && zip -j lambda.zip index.js
 endef
 
 # ##################################################################
-# #### creation of lambda resources
+# #### Creation of lambda resources
 # ##################################################################
 
-create.lambda: # create.lambda: creacion del recurso de lambda
+update.lambda: # update.lambda: actualizacion de la funcion lambda
 	$(call create.zip)

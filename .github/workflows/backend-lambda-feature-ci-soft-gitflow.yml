@@ -28,6 +28,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    outputs:
+      artifact-name: ${{ steps.mi_zip.outputs.artifact-id }}
 
     steps:
       - name: Checkout code
@@ -70,7 +72,11 @@ jobs:
           retention-days: 1
 
       - name: Run base make
+        id: base_make_step 
         uses: dvop-test/workflow-backend-lambda/actions/build-lambda@master
+        with:
+          lambda-path: 'app' # Enviamos la ruta al INPUT
 
-    outputs:
-      artifact-name: ${{ steps.mi_zip.outputs.artifact-id }}
+      - name: Usar el resultado
+        run: |
+          echo "El Makefile guardó el archivo en: ${{ steps.base_make_step.outputs.zip-path }}"
