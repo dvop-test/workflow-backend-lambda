@@ -54,7 +54,7 @@ jobs:
           ls -la makefiles/
           
           # 3. Ahora el 'include makefiles/fn.mk' funcionará con todo el contexto
-          make create.lambda
+          make update.lambda
 
       - name: test
         run: |
