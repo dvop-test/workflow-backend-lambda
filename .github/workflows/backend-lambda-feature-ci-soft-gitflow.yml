@@ -56,21 +56,6 @@ jobs:
         working-directory: ./app
         run: npm run build && ls -la
 
-      - name: Package Lambda
-        working-directory: ./app
-        run: |
-          mkdir -p dist-package
-          cp -r dist node_modules package.json dist-package/
-          cd dist-package && zip -r ../lambda.zip .
-
-      - name: Upload Artifact
-        id: mi_zip
-        uses: actions/upload-artifact@v5
-        with:
-          name: mi-lambda-zip
-          path: app/lambda.zip
-          retention-days: 1
-
       - name: Run base make
         id: base_make_step 
         uses: dvop-test/workflow-backend-lambda/actions/build-lambda@master
@@ -78,5 +63,16 @@ jobs:
           lambda-path: 'app' # Enviamos la ruta al INPUT
 
       - name: Usar el resultado
+        working-directory: ./app
         run: |
           echo "El Makefile guardó el archivo en: ${{ steps.base_make_step.outputs.zip-path }}"
+          ls -la ${{ steps.base_make_step.outputs.zip-path }}
+
+      - name: Upload Artifact
+        if: success()
+        id: mi_zip
+        uses: actions/upload-artifact@v5
+        with:
+          name: mi-lambda-zip
+          path: ${{ steps.base_make_step.outputs.zip-path }}
+          retention-days: 1
