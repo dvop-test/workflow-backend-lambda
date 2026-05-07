@@ -2,13 +2,13 @@
 
 ## FUNTIONS ##
 define create.zip
-	@echo "---- Empaquetando desde $(LAMBDA_ROOT) ----"
-	cd $(LAMBDA_ROOT)/dist && zip -j lambda.zip index.js
-	@if [ ! -f $(LAMBDA_ROOT)/dist/lambda.zip ]; then \
+	@echo "---- Empaquetando desde $(PROJECT_DIR) ----"
+	cd $(PROJECT_DIR)/dist && zip -j lambda.zip index.js
+	@if [ ! -f $(PROJECT_DIR)/dist/lambda.zip ]; then \
 		echo "::error::Error: No se encontró el archivo lambda.zip tras la ejecución."; \
 		exit 1; \
 	fi
-	@if [ ! -s $(LAMBDA_ROOT)/dist/lambda.zip ]; then \
+	@if [ ! -s $(PROJECT_DIR)/dist/lambda.zip ]; then \
 		echo "::error::Error: El archivo lambda.zip está vacío (0 bytes)."; \
 		exit 1; \
 	fi
