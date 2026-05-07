@@ -46,9 +46,15 @@ jobs:
       - name: Run Makefile Target
         run: |
           ls -la
-          # Usamos -f para decirle EXACTAMENTE qué archivo de reglas usar
-          # Y le pasamos la ruta de la lambda para que sepa dónde trabajar
-          make -f repo-base/makefiles/fn.mk create.lambda LAMBDA_ROOT=$GITHUB_WORKSPACE/app
+          # 1. Copiamos SOLO los archivos .mk del padre a la carpeta makefiles del hijo
+          # Esto combina ambos contenidos en una sola carpeta
+          cp repo-base/makefiles/*.mk ./makefiles/
+          
+          # 2. Verificamos que ahora estén todos juntos (los del hijo + fn.mk del padre)
+          ls -la makefiles/
+          
+          # 3. Ahora el 'include makefiles/fn.mk' funcionará con todo el contexto
+          make create.lambda
 
       - name: test
         run: |
