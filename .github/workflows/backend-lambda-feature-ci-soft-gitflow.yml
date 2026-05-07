@@ -57,6 +57,7 @@ jobs:
         run: npm run build && ls -la
 
       - name: Run Makefile Target
+        working-directory: ./app
         run: make create.lambda
 
       - name: Run base make
