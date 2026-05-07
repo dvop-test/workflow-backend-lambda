@@ -41,20 +41,13 @@ jobs:
         with:
           repository: dvop-test/workflow-backend-lambda
           # IMPORTANTE: La ruta debe coincidir con tu 'include' (makefiles/fn.mk)
-          path: repo-base
+          path: central-logic
 
       - name: Run Makefile Target
         run: |
-          ls -la
-          # 1. Copiamos SOLO los archivos .mk del padre a la carpeta makefiles del hijo
-          # Esto combina ambos contenidos en una sola carpeta
-          cp repo-base/makefiles/*.mk ./makefiles/
-          
-          # 2. Verificamos que ahora estén todos juntos (los del hijo + fn.mk del padre)
-          ls -la makefiles/
-          
-          # 3. Ahora el 'include makefiles/fn.mk' funcionará con todo el contexto
-          make update.lambda
+          # -I .             -> Busca includes en la carpeta actual (hijo)
+          # -I central-logic -> Busca includes en la carpeta del padre
+          make -I . -I central-logic update.lambda
 
       - name: test
         run: |
