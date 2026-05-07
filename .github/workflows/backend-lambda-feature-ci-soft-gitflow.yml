@@ -35,19 +35,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-
       - name: Checkout Base Logic (Padre)
         uses: actions/checkout@v5
         with:
           repository: dvop-test/workflow-backend-lambda
-          # IMPORTANTE: La ruta debe coincidir con tu 'include' (makefiles/fn.mk)
           path: central-logic
-
-      - name: Run Makefile Target
-        run: |
-          # -I .             -> Busca includes en la carpeta actual (hijo)
-          # -I central-logic -> Busca includes en la carpeta del padre
-          make -I . -I central-logic update.lambda
 
       - name: test
         run: |
@@ -71,8 +63,18 @@ jobs:
         run: npm run build && ls -la
 
       - name: Run Makefile Target
-        working-directory: ./app
-        run: make create.lambda
+        id: base_run_step 
+        run: |
+          # -I .             -> Busca includes en la carpeta actual (hijo)
+          # -I central-logic -> Busca includes en la carpeta del padre
+          make -I . -I central-logic update.lambda LAMBDA_ROOT=${{ github.workspace }}/app
+          echo "zip_result=app/dist/lambda.zip" >> $GITHUB_OUTPUT
+
+      - name: Usar el resultado 1
+        working-directory: ./app/dist
+        run: |
+          echo "El Makefile guardó el archivo en: ${{ steps.base_run_step.outputs.zip_result }}"
+          ls -la
 
       - name: Run base make
         id: base_make_step 
