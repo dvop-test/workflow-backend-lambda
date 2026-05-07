@@ -19,5 +19,5 @@ runs:
       shell: bash
       working-directory: ${{ github.action_path }}/../../ 
       run: | 
-        make create.lambda LAMBDA_ROOT=${{ github.workspace }}/${{ inputs.lambda-path }}
+        make update.lambda LAMBDA_ROOT=${{ github.workspace }}/${{ inputs.lambda-path }}
         echo "zip_result=${{ inputs.lambda-path }}/lambda.zip" >> $GITHUB_OUTPUT
