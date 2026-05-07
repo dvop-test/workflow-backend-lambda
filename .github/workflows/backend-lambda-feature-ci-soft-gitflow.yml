@@ -41,16 +41,13 @@ jobs:
         with:
           repository: dvop-test/workflow-backend-lambda
           # IMPORTANTE: La ruta debe coincidir con tu 'include' (makefiles/fn.mk)
-          path: base-repo
+          path: repo-base
 
       - name: Run Makefile Target
         run: |
-          # Movemos la carpeta para que el 'include' la encuentre donde espera
-          mv base-repo/makefiles ./makefiles
-          
-          # Ahora el 'ls' y el 'make' funcionarán
-          ls -la makefiles/
-          make create.lambda
+          # El flag -I le dice a make: "Si no encuentras algo, búscalo también en repo-base"
+          # Esto hará que 'include makefiles/fn.mk' funcione correctamente
+          make -I repo-base create.lambda
 
       - name: test
         run: |
