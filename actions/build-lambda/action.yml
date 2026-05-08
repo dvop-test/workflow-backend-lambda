@@ -23,8 +23,7 @@ runs:
         ls -la
         # Usamos -f para apuntar al archivo de lógica en la carpeta central-logic
         # Pasamos PROJECT_DIR para asegurar que el zip se cree en el lugar correcto
-        make -f central-logic/makefiles/fn.mk update.lambda \
-             PROJECT_DIR=${{ inputs.lambda-path }}
+        make -f central-logic/makefiles/fn.mk update.lambda
 
         # Generamos el output para que la línea 12 de tu imagen funcione
         echo "zip_result=${{ inputs.lambda-path }}/dist/lambda.zip" >> $GITHUB_OUTPUT
