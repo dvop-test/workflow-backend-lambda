@@ -24,3 +24,6 @@ runs:
         cd ${{ github.workspace }}
         pwd
         ls -la
+        cd ${{ github.workspace }}/central-logic
+        pwd
+        ls -la
