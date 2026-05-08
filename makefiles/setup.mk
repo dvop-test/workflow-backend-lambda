@@ -1,5 +1,9 @@
 .PHONY: env-setup \
 
+## INCLUDE ##
+-include Makefile
+
+## GENERAL ##
 VARS_TO_EXPORT = APP_ENV
 
 # ##################################################################
