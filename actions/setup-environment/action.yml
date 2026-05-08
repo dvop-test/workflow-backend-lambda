@@ -1,0 +1,7 @@
+name: 'Setup Environment'
+description: 'Sets up the environment for building and deploying the Lambda function.'
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run: make -C ./app env-setup

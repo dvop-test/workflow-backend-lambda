@@ -34,6 +34,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
+      - uses: dvop-test/workflow-backend-lambda/actions/setup-environment@master
 
       - name: Checkout Base Logic (Padre)
         uses: actions/checkout@v5

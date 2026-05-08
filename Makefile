@@ -2,6 +2,11 @@
 
 ## REFERENCIAS ##
 include makefiles/fn.mk
+include makefiles/setup.mk
+
+
+## GENERAL ##
+APP_ENV 							?= local
 
 ##################################################################
 #### Targets Development Commands
