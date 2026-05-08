@@ -2,7 +2,7 @@ name: 'Build Lambda'
 description: 'Builds the Lambda function and prepares it for deployment.'
 
 outputs:
-  zip-path:
+  zip_path:
     description: 'Ruta donde quedó el zip'
     value: ${{ steps.run-make.outputs.zip_path }}
 
@@ -15,4 +15,4 @@ runs:
       working-directory: ${{ github.workspace }}
       run: |
         make -f workflow-core/makefiles/fn.mk update.lambda
-        echo "zip-path=${PROJECT_DIR}/dist/${PROJECT_NAME}-${APP_ENV}.zip" >> $GITHUB_OUTPUT
+        echo "zip_path=${PROJECT_DIR}/dist/${PROJECT_NAME}-${APP_ENV}.zip" >> $GITHUB_OUTPUT

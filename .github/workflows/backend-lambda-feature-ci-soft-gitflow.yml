@@ -69,5 +69,5 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: ${{ env.PROJECT_NAME }}-${{ env.APP_ENV }}
-          path: ${{ steps.package_step.outputs.zip-path }}
+          path: ${{ steps.package_step.outputs.zip_path }}
           retention-days: 1
