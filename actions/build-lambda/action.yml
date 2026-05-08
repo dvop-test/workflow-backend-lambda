@@ -18,8 +18,7 @@ runs:
       id: run-make
       shell: bash
       working-directory: ${{ github.action_path }}/../../ 
-      run: | 
-        make -C ${{ github.workspace }}/${{ inputs.lambda-path }} \
-            -f ${{ github.action_path }}/../../makefiles/fn.mk \
-            update.lambda 
-        echo "zip_result=${{ inputs.lambda-path }}/dist/lambda.zip" >> $GITHUB_OUTPUT
+      run: |
+        ls ${{ github.action_path }} 
+        cd ${{ github.action_path }}/../../
+        ls -la
