@@ -30,11 +30,18 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - run: npm install && npm test
+      - name: Checkout Code
+        uses: actions/checkout@v5
       
+      - name: Install and Test
+        working-directory: ./app 
+        run: |
+          npm install
+          npm test
+
   build:
     name: Build And Package
+    needs: test
     runs-on: ubuntu-latest
     outputs:
       artifact-name: ${{ steps.upload_lambda_zip.outputs.artifact-id }}
