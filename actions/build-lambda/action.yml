@@ -17,8 +17,9 @@ runs:
     - name: Run Centralized Makefile
       id: run-make
       shell: bash
-      working-directory: ${{ github.action_path }}/../../ 
+      working-directory: ${{ github.workspace }}/central-logic/
       run: |
+        make update.lambda 
         ls
         pwd
         cd ${{ github.workspace }}
@@ -28,4 +29,4 @@ runs:
         pwd
         ls -la
         echo ${PROJECT_DIR}
-        echo PROJECT_DIR
+        echo $PROJECT_DIR
