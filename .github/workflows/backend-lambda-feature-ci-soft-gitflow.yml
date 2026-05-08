@@ -26,13 +26,13 @@ env:
 jobs:
 
   build:
-    name: Build
+    name: Build And Package
     runs-on: ubuntu-latest
     outputs:
       artifact-name: ${{ steps.upload_lambda_zip.outputs.artifact-id }}
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v5
 
       - name: Checkout CI/CD Core Logic
@@ -44,7 +44,7 @@ jobs:
       - name: Setup Environment
         uses: dvop-test/workflow-backend-lambda/actions/setup-environment@master
 
-      - name: Setup Node.js
+      - name: Setup Runtime
         uses: actions/setup-node@v5
         with:
           node-version: '22'
@@ -55,11 +55,11 @@ jobs:
         working-directory: ./app
         run: npm install
 
-      - name: Build Project
+      - name: Build Application
         working-directory: ./app
         run: npm run build
 
-      - name: Package Lambda Artifact
+      - name: Package Lambda
         id: package_step 
         uses: dvop-test/workflow-backend-lambda/actions/build-lambda@master
 
