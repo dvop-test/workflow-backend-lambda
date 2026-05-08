@@ -35,6 +35,8 @@ jobs:
       
       - name: Install and Test
         working-directory: ./app 
+        env:
+          FORCE_COLOR: 1
         run: |
           npm install
           npm test
