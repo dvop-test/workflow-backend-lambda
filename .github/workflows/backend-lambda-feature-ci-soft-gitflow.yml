@@ -15,16 +15,8 @@ on:
         required: false
         default: "us-east-1"
         type: string
-    # secrets:
-    #   AWS_ROLE_ARN:
-    #     required: true
-
-env:
-  STAGE: feature
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-
 
   test:
     name: Unit Tests
