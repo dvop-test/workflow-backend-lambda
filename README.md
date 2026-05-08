@@ -15,3 +15,8 @@
         with:
           name: lambda-artifact
           path: lambda.zip
+
+make \
+          -C ${{ github.workspace }}/app \
+          -f ${{ github.action_path }}/../../makefiles/setup.mk \
+          env-setup
