@@ -27,3 +27,5 @@ runs:
         cd ${{ github.workspace }}/central-logic
         pwd
         ls -la
+        echo ${PROJECT_DIR}
+        echo PROJECT_DIR
