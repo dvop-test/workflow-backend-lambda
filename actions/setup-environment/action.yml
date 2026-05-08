@@ -8,5 +8,5 @@ runs:
       run: |
         make
           -C ${{ github.workspace }}/${{ inputs.lambda-path }} \
-          -f ${{ github.action_path }}/../../makefiles/fn.mk \
+          -f ${{ github.action_path }}/../../makefiles/setup.mk \
           env-setup
