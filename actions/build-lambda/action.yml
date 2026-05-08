@@ -4,7 +4,7 @@ description: 'Builds the Lambda function and prepares it for deployment.'
 outputs:
   zip-path:
     description: 'Ruta donde quedó el zip'
-    value: ${{ steps.run-make.outputs.zip_result }}
+    value: ${{ steps.run-make.outputs.zip_path }}
 
 runs:
   using: 'composite'
@@ -15,4 +15,4 @@ runs:
       working-directory: ${{ github.workspace }}
       run: |
         make -f workflow-core/makefiles/fn.mk update.lambda
-        echo "zip_result=${PROJECT_DIR}/dist/lambda.zip" >> $GITHUB_OUTPUT
+        echo "zip-path=${PROJECT_DIR}/dist/${PROJECT_NAME_ZIP}.zip" >> $GITHUB_OUTPUT
