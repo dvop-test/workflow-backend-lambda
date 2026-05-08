@@ -15,4 +15,4 @@ runs:
       working-directory: ${{ github.workspace }}
       run: |
         make -f workflow-core/makefiles/fn.mk update.lambda
-        echo "zip-path=${PROJECT_DIR}/dist/${PROJECT_NAME_ZIP}.zip" >> $GITHUB_OUTPUT
+        echo "zip-path=${PROJECT_DIR}/dist/${PROJECT_NAME}-${APP_ENV}.zip" >> $GITHUB_OUTPUT
