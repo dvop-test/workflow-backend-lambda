@@ -14,5 +14,5 @@ runs:
       shell: bash
       working-directory: ${{ github.workspace }}
       run: |
-        make -f central-logic/makefiles/fn.mk update.lambda
+        make -f workflow-core/makefiles/fn.mk update.lambda
         echo "zip_result=${PROJECT_DIR}/dist/lambda.zip" >> $GITHUB_OUTPUT

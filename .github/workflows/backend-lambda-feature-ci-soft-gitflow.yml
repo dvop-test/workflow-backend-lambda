@@ -29,26 +29,20 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     outputs:
-      artifact-name: ${{ steps.mi_zip.outputs.artifact-id }}
+      artifact-name: ${{ steps.upload_lambda_zip.outputs.artifact-id }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Setup Environment
-        uses: dvop-test/workflow-backend-lambda/actions/setup-environment@master
-
-      - name: Checkout Base Logic (Padre)
+      - name: Checkout CI/CD Core Logic
         uses: actions/checkout@v5
         with:
           repository: dvop-test/workflow-backend-lambda
-          path: central-logic
+          path: workflow-core
 
-      - name: test
-        run: |
-          pwd
-          ls -la
-          make dump-NPM_PACKAGE_NAME
+      - name: Setup Environment
+        uses: dvop-test/workflow-backend-lambda/actions/setup-environment@master
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -57,43 +51,23 @@ jobs:
           cache: 'npm'
           cache-dependency-path: './app/package-lock.json'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         working-directory: ./app
-        run: ls -la && npm install
+        run: npm install
 
-      - name: Build project
+      - name: Build Project
         working-directory: ./app
-        run: npm run build && ls -la
+        run: npm run build
 
-      - name: Run Makefile Target
-        id: base_run_step 
-        run: |
-          # -I .             -> Busca includes en la carpeta actual (hijo)
-          # -I central-logic -> Busca includes en la carpeta del padre
-          make -I . -I central-logic update.lambda LAMBDA_ROOT=${{ github.workspace }}/app
-          echo "zip_result=app/dist/lambda.zip" >> $GITHUB_OUTPUT
-
-      - name: Usar el resultado 1
-        working-directory: ./app/dist
-        run: |
-          echo "El Makefile guardó el archivo en: ${{ steps.base_run_step.outputs.zip_result }}"
-          ls -la
-
-      - name: Run base make
-        id: base_make_step 
+      - name: Package Lambda Artifact
+        id: package_step 
         uses: dvop-test/workflow-backend-lambda/actions/build-lambda@master
-
-      - name: Usar el resultado
-        working-directory: ./app
-        run: |
-          echo "El Makefile guardó el archivo en: ${{ steps.base_make_step.outputs.zip-path }}"
-          ls -la
 
       - name: Upload Artifact
         if: success()
-        id: mi_zip
+        id: upload_lambda_zip
         uses: actions/upload-artifact@v5
         with:
-          name: mi-lambda-zip
-          path: ${{ steps.base_make_step.outputs.zip-path }}
+          name: ${{ env.PROJECT_NAME }}-${{ env.APP_ENV }}-zip
+          path: ${{ steps.package_step.outputs.zip-path }}
           retention-days: 1
