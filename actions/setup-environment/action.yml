@@ -4,4 +4,9 @@ runs:
   using: "composite"
   steps:
     - shell: bash
-      run: make -C ./app env-setup
+      working-directory: ${{ github.action_path }}/../../ 
+      run: |
+        make
+          -C ${{ github.workspace }}/${{ inputs.lambda-path }} \
+          -f ${{ github.action_path }}/../../makefiles/fn.mk \
+          env-setup

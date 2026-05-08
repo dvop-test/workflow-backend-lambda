@@ -6,7 +6,7 @@ include makefiles/setup.mk
 
 
 ## GENERAL ##
-APP_ENV 							?= local
+APP_ENV 							?= local2
 
 ##################################################################
 #### Targets Development Commands
