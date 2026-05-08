@@ -6,11 +6,9 @@ PROJECT_NAME_ZIP     			= ${PROJECT_NAME}-${APP_ENV}.zip
 ## FUNTIONS ##
 define create.zip
 	@echo "——— Preparando dependencias de producción ———"
-	# 1. Borramos dependencias de desarrollo para que el ZIP sea ligero
-	@cd $(PROJECT_DIR) && npm prune --production
+	@cd $(PROJECT_DIR) && npm prune --omit=dev
 	
 	@echo "——— Empaquetando código y módulos ———"
-	# 2. Limpiamos mapas en dist
 	@cd $(PROJECT_DIR)/dist && find . -name "*.map" -type f -delete || true
 	
 	# 3. Creamos el ZIP inicial con el código compilado
