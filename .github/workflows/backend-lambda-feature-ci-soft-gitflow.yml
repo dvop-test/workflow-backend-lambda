@@ -68,6 +68,6 @@ jobs:
         id: upload_lambda_zip
         uses: actions/upload-artifact@v5
         with:
-          name: ${{ env.PROJECT_NAME }}-${{ env.APP_ENV }}-zip
+          name: ${{ env.PROJECT_NAME }}-${{ env.APP_ENV }}
           path: ${{ steps.package_step.outputs.zip-path }}
           retention-days: 1
