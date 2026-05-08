@@ -4,9 +4,20 @@ runs:
   using: "composite"
   steps:
     - shell: bash
-      working-directory: ${{ github.action_path }}/../../ 
       run: |
-        echo ${{ github.workspace }}
-        echo ${{ github.action_path }}
-        ls -la ${{ github.workspace }}
-        ls -la ${{ github.action_path }}
+        # 1. Ya estamos en la raíz (${{ github.workspace }}), no hace falta hacer 'cd app'
+
+        # 2. Buscamos los nombres de las variables en el Makefile de la raíz
+        # El awk limpia los tabs y espacios, quedándose solo con el nombre (OWNER, etc.)
+        VARS=$(grep -E '^[A-Z_]+[[:space:]]*\??=' Makefile | awk '{print $1}')
+
+        echo "--- Cargando variables desde la raíz ---"
+        for var in $VARS; do
+          # 3. Ejecutamos el target dump-% que ya tienes en la línea 29 de tu imagen
+          # Esto resuelve los $(shell jq...) y $(shell basename...) correctamente
+          VALUE=$(make -s --no-print-directory "dump-$var")
+          
+          # 4. Exportamos a GitHub Environment
+          echo "$var=$VALUE" >> $GITHUB_ENV
+          echo "✅ $var=$VALUE"
+        done
