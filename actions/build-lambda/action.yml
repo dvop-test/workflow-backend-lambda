@@ -19,6 +19,8 @@ runs:
       shell: bash
       working-directory: ${{ github.action_path }}/../../ 
       run: |
-        ls ${{ github.action_path }} 
-        cd ${{ github.action_path }}/../../
+        ls
+        pwd
+        cd ${{ github.workspace }}
+        pwd
         ls -la
