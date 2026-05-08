@@ -25,6 +25,14 @@ env:
 
 jobs:
 
+
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: npm install && npm test
+      
   build:
     name: Build And Package
     runs-on: ubuntu-latest
