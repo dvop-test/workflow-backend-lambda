@@ -82,8 +82,6 @@ jobs:
       - name: Run base make
         id: base_make_step 
         uses: dvop-test/workflow-backend-lambda/actions/build-lambda@master
-        with:
-          lambda-path: 'app' # Enviamos la ruta al INPUT
 
       - name: Usar el resultado
         working-directory: ./app
