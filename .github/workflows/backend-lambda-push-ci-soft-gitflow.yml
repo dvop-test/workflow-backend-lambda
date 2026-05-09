@@ -10,12 +10,11 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:
-      - name: Post Run Link (Live)
-        uses: mshick/add-pr-comment@v2
-        if: github.event_name == 'pull_request' || github.event.pull_request != null
-        with:
-          message: |
-            - [Ver consola de logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+      - name: Generate Live Link
+        run: |
+          echo "### 🚀 Seguimiento de Despliegue" >> $GITHUB_STEP_SUMMARY
+          echo "El empaquetado y validación han comenzado." >> $GITHUB_STEP_SUMMARY
+          echo "[Haz clic aquí para ver los logs en vivo](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
 
       - name: Checkout Code
         uses: actions/checkout@v5
