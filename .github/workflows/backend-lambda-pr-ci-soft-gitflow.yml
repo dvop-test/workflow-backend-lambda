@@ -54,6 +54,4 @@ jobs:
         if: always()
         with:
           message: |
-            ### 🛠️ Resultado de la Validación
-            - **Estado:** ${{ job.status == 'success' && '✅ Pasó' || '❌ Falló' }}
             - **Workflow:** [Ver ejecución del Pull Request](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
