@@ -48,10 +48,3 @@ jobs:
         run: |
           npm ci
           npm run build
-
-      - name: Post Run Link
-        uses: mshick/add-pr-comment@v2
-        if: always()
-        with:
-          message: |
-            - **Workflow:** [Ver ejecución del Pull Request](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
