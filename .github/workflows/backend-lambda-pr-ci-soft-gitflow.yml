@@ -48,3 +48,12 @@ jobs:
         run: |
           npm install
           npm run build
+
+      - name: Post Run Link
+        uses: mshick/add-pr-comment@v2
+        if: always()
+        with:
+          message: |
+            ### 🛠️ Resultado de la Validación
+            - **Estado:** ${{ job.status == 'success' && '✅ Pasó' || '❌ Falló' }}
+            - **Detalles:** [Haga clic aquí para ver los logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
