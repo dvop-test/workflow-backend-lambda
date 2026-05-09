@@ -1,5 +1,5 @@
 ---
-name: Backend Lambda Feature CI (Soft GitFlow)
+name: Backend Lambda Push CI (Soft GitFlow)
 
 on:
   workflow_call:
@@ -13,13 +13,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v5
       
-      - name: Setup Runtime
-        uses: actions/setup-node@v5
-        with:
-          node-version: '22'
-          cache: 'npm'
-          cache-dependency-path: './app/package-lock.json'
-
       - name: Install and Test
         working-directory: ./app 
         env:
@@ -72,6 +65,6 @@ jobs:
         id: upload_lambda_zip
         uses: actions/upload-artifact@v5
         with:
-          name: ${{ env.PROJECT_NAME }}-${{ env.APP_ENV }}-feature
+          name: ${{ env.PROJECT_NAME }}-${{ env.APP_ENV }}
           path: ${{ steps.package_step.outputs.zip_path }}
-          retention-days: 1
+          retention-days: 7
