@@ -25,7 +25,7 @@ jobs:
         env:
           FORCE_COLOR: 1
         run: |
-          npm install
+          npm ci
           npm test
   
   build:
@@ -46,7 +46,7 @@ jobs:
       - name: Build Application
         working-directory: ./app
         run: |
-          npm install
+          npm ci
           npm run build
 
       - name: Post Run Link
@@ -56,4 +56,4 @@ jobs:
           message: |
             ### 🛠️ Resultado de la Validación
             - **Estado:** ${{ job.status == 'success' && '✅ Pasó' || '❌ Falló' }}
-            - **Detalles:** [Haga clic aquí para ver los logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            - **Workflow:** [Ver ejecución del Pull Request](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
